@@ -25,4 +25,7 @@ export class Subscriber {
         this.isStopped = true;
         this.destinaiton?.complete?.();
     }
+    error(err) {
+        this.destinaiton?.error?.(err);
+    }
 }

@@ -1,17 +1,19 @@
-import { Observable } from "./rxjs";
+import { of, from } from './rxjs'
 
-const observable = new Observable((subscriber) => {
-  subscriber.next(1);
-  subscriber.next(2);
-  subscriber.next(3);
-  subscriber.complete()
+const arrayObeservable = of(1,2,3)
+arrayObeservable.subscribe({
+    next: (val) => console.log(val + 'abc')
 })
 
-const observer= {
-  next: (v) => console.log(v),
-  error: error => console.console(error),
-  complete: () => console.log('complete')
-}
 
+const promisevalue = from(new Promise((resolve, reject) => {
+    setTimeout(() => {
+        // resolve('ok')
+        reject('error');
+    }, 3000)
+}));
+promisevalue.subscribe({
+    next: (val) => console.log(val),
+    error: (error) => console.log('catch' + error)
+})
 
-observable.subscribe(observer);
